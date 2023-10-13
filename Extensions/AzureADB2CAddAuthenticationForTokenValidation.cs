@@ -1,0 +1,66 @@
+﻿using HowToSecureAPI.Demo.Configs.MultipleValidation.AzureADAndB2CWithOkta;
+using HowToSecureAPI.Demo.Configs.OnlyAzureADB2CValidation;
+using HowToSecureAPI.Demo.Configs.OnlyAzureADInternalValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Tokens;
+using System.Collections.Generic;
+using HowToSecureAPI.Demo.Configs.MultipleValidationIncludingOkta.OnlyAzureADAndB2C;
+
+namespace HowToSecureAPI.Demo.Extensions
+{
+    /// <summary>
+    /// Azure Ad and Azure AD B2C
+    /// Multiple Add Authentication For Token Validation
+    /// </summary>
+    public static class AzureADB2CAddAuthenticationForTokenValidation
+    {
+        private const string AzureB2CAuthorizationServer = "AzureB2CAuthorizationServer";
+
+        /// <summary>
+        /// This extension class is created for validate Azure AD and Azure AD B2C tokens
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="multipleValidationConfig"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddAuthenticationForAzureADB2C(this IServiceCollection services, AzureB2CValidationConfig azureB2CValidationConfig)
+        {
+            var configManager = new ConfigurationManager<OpenIdConnectConfiguration>(azureB2CValidationConfig.MetadataAddress, new OpenIdConnectConfigurationRetriever());
+
+            var openidconfig = configManager.GetConfigurationAsync().Result;
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            })
+                // Azure AD B2C TOKEN VAlAIDATION
+                .AddJwtBearer(AzureB2CAuthorizationServer, options =>
+                {
+                    options.Authority = azureB2CValidationConfig.Authority;
+                    //options.Audience = "13cfb580-5366-4b81-b90b-92a1dca8879b";
+                    options.MetadataAddress = azureB2CValidationConfig.MetadataAddress;
+
+                    options.RequireHttpsMetadata = false;
+                    options.IncludeErrorDetails = true;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidAudiences = azureB2CValidationConfig.ValidAudiences,
+                        ValidIssuers = azureB2CValidationConfig.ValidIssuers,
+                        RequireExpirationTime = true,
+                        ValidateLifetime = true,
+
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKeys = openidconfig.SigningKeys,
+                    };
+                });
+
+            return services;
+        }
+    }
+}
