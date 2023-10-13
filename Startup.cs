@@ -156,13 +156,13 @@ namespace HowToSecureAPI.Demo
             });
 
             // Uncomment the code below for Azure AD B2C Only
-            #region Multiple Token Validation for Azure AD 
+            #region Token Validation for Azure AD 
             services.AddAuthenticationForAzureADB2C(azureB2CValidationConfig);
             #endregion
 
             // Uncomment the code below for Azure AD Only
-            #region Multiple Token Validation for Azure AD 
-            //services.AddAuthenticationForAzureADInternal(azureADvalidationconfig);
+            #region Token Validation for Azure AD 
+            services.AddAuthenticationForAzureADInternal(azureADvalidationconfig);
             #endregion
 
             // Uncomment the code below for Azure AD and Azure AD B2C Token Validation
