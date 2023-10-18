@@ -1,10 +1,8 @@
 ﻿using HowToSecureAPI.Demo.Configs.MultipleValidation.AzureADAndB2CWithOkta;
-using HowToSecureAPI.Demo.Configs.OnlyAzureADB2CValidation;
-using HowToSecureAPI.Demo.Configs.OnlyAzureADInternalValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
 
@@ -85,7 +83,7 @@ namespace HowToSecureAPI.Demo.Extensions
                     };
                 }).AddJwtBearer(OktaAuthorizationServer, options =>
                 {
-                    options.Authority = multipleValidationConfig.Okta.Authority; // Customer-IAM (Terraform) authz server
+                    options.Authority = multipleValidationConfig.Okta.Authority; 
                     options.Audience = multipleValidationConfig.Okta.Audience;
                     options.RequireHttpsMetadata = false;
                     options.IncludeErrorDetails = true;
@@ -93,6 +91,8 @@ namespace HowToSecureAPI.Demo.Extensions
                     {
                         ValidateAudience = true,
                         ValidAudiences = multipleValidationConfig.Okta.ValidAudiences,
+                        ValidateLifetime = true
+                        // feel free to check signinkey and other parameters
                     };
 
                 });

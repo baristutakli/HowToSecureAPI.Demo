@@ -20,8 +20,6 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
           AzureADB2CSwaggerConfig swaggerConfig)
         {
 
-
-
             services.AddSwaggerGen(options =>
             {
                 options.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
@@ -47,8 +45,8 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
                 {
                     Implicit = new OpenApiOAuthFlow
                     {
-                        AuthorizationUrl = new Uri(swaggerConfig.AuthorizationUrl),
-                        TokenUrl = new Uri(swaggerConfig.TokenUrl),
+                        AuthorizationUrl = new Uri(swaggerConfig.AuthorizationUrl), // Azure AD B2C authorize endpoint
+                        TokenUrl = new Uri(swaggerConfig.TokenUrl),// Azure AD B2C token endpoint
                         Scopes = scope
                     }
                 };
@@ -111,13 +109,13 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
                     options.SwaggerEndpoint($"{description.GroupName}/swagger.json",
                         description.GroupName.ToUpperInvariant());
                 }
-                options.OAuthClientId(graphSwaggerConfig.OAuthClientId);
+                options.OAuthClientId(graphSwaggerConfig.OAuthClientId); // swagger application client id
 
-                options.OAuthAppName(graphSwaggerConfig.OAuthClientName);
+                options.OAuthAppName(graphSwaggerConfig.OAuthClientName); // swagger application name
 
                 options.OAuthUsePkce();
 
-                options.OAuth2RedirectUrl(graphSwaggerConfig.RedirectUri);
+                options.OAuth2RedirectUrl(graphSwaggerConfig.RedirectUri); // swagger application redirect url
 
             });
 
