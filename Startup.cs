@@ -92,29 +92,30 @@ namespace HowToSecureAPI.Demo
 
             // Uncomment the code below for Azure AD Only
             // Only Azure AD INTERNAL apps allowed
-            services.AddSingleton<IAuthorizationHandler, InternalAppScopeAuthorizationHandler>(); // Internal scope Requirement
-            services.AddSingleton<IAuthorizationHandler, InternalADAllowedApplicationsAuthorizationHandler>(); // Internal AD Applications AuthorizationHandler
+            //services.AddSingleton<IAuthorizationHandler, InternalAppScopeAuthorizationHandler>(); // Internal scope Requirement
+            //services.AddSingleton<IAuthorizationHandler, InternalADAllowedApplicationsAuthorizationHandler>(); // Internal AD Applications AuthorizationHandler
 
 
             // Uncomment the code below for Azure AD B2C Only
             // Only Azure AD B2C apps allowed
-            services.AddSingleton<IAuthorizationHandler, B2CAppScopeAuthorizationHandler>(); // supportAzure AD B2C
-            services.AddSingleton<IAuthorizationHandler, AzureB2CAllowedApplicationsAuthorizationHandler>(); // Azure AD B2C Applications AuthorizationHandler
+            //services.AddSingleton<IAuthorizationHandler, B2CAppScopeAuthorizationHandler>(); // supportAzure AD B2C
+            //services.AddSingleton<IAuthorizationHandler, AzureB2CAllowedApplicationsAuthorizationHandler>(); // Azure AD B2C Applications AuthorizationHandler
 
 
             // Uncomment the code below for Azure AD and Azure AD B2C Token Validation
             // support Azure AD , Azure AD B2C
-            services.AddSingleton<IAuthorizationHandler, B2CAndAzureADInternalTokenScopeAuthorizationHandler>(); // support Azure AD , Azure AD B2C
-            services.AddSingleton<IAuthorizationHandler, AzureADAndB2CAllowedApplicationsAuthorizationHandler>(); // Azure AD B2C Applications AuthorizationHandler
+            //services.AddSingleton<IAuthorizationHandler, B2CAndAzureADInternalTokenScopeAuthorizationHandler>(); // support Azure AD , Azure AD B2C
+            //services.AddSingleton<IAuthorizationHandler, AzureADAndB2CAllowedApplicationsAuthorizationHandler>(); // Azure AD B2C Applications AuthorizationHandler
 
 
             // Uncomment the code below for Multiple Token Validation including Okta token
             // support Azure AD , Azure AD B2C and Okta
-            services.AddSingleton<IAuthorizationHandler, MultipleIdentityProviderTokenScopeAuthorizationHandler>();
-            services.AddSingleton<IAuthorizationHandler, AllowedApplicationsAuthorizationHandler>(); // support Azure AD , Azure AD B2C and Okta
+            //services.AddSingleton<IAuthorizationHandler, MultipleIdentityProviderTokenScopeAuthorizationHandler>();
+            //services.AddSingleton<IAuthorizationHandler, AllowedApplicationsAuthorizationHandler>(); // support Azure AD , Azure AD B2C and Okta
 
             #endregion
 
+            // Add Authorization for endpoints 
             services.AddAuthorization(options =>
             {
                 // Uncomment the code below for Azure AD Only
@@ -160,13 +161,13 @@ namespace HowToSecureAPI.Demo
             });
 
             // Uncomment the code below for Azure AD B2C Only
-            #region Token Validation for Azure AD 
-            services.AddAuthenticationForAzureADB2C(azureB2CValidationConfig);
+            #region Token Validation for Azure AD B2C
+            // services.AddAuthenticationForAzureADB2C(azureB2CValidationConfig);
             #endregion
 
             // Uncomment the code below for Azure AD Only
             #region Token Validation for Azure AD 
-            services.AddAuthenticationForAzureADInternal(azureADvalidationconfig);
+            // services.AddAuthenticationForAzureADInternal(azureADvalidationconfig);
             #endregion
 
             // Uncomment the code below for Azure AD and Azure AD B2C Token Validation
