@@ -119,6 +119,7 @@ namespace HowToSecureAPI.Demo
             {
                 // Uncomment the code below for Azure AD Only
                 // Only Azure AD INTERNAL apps allowed
+                // Don't forget to change required scopes for your own scopes
                 options.AddPolicy(ApiConstants.InternalUserReadPolicyName, policyBuilder =>
                     policyBuilder
                         .AddAuthenticationSchemes(InternalAzureAuthorizationServer)
@@ -127,30 +128,33 @@ namespace HowToSecureAPI.Demo
 
                 // Uncomment the code below for Azure AD B2C Only
                 // Only Azure AD B2C apps allowed
-                options.AddPolicy(ApiConstants.UserReadPolicyName, policyBuilder =>
-                    policyBuilder
-                        .AddAuthenticationSchemes(InternalAzureAuthorizationServer, AzureB2CAuthorizationServer)
-                        .AddRequirements(new AllowedApplicationsRequirement(azureB2CValidationConfig.AllowedAppIds))
-                .AddRequirements(new B2CAppScopeRequirement(new List<string> { ApiConstants.UsersReadScope, ApiConstants.UsersManageScope, "CIAM.Users.Manage.Swg" })).Build());
+                // Don't forget to change required scopes for your own scopes
+                //options.AddPolicy(ApiConstants.UserReadPolicyName, policyBuilder =>
+                //    policyBuilder
+                //        .AddAuthenticationSchemes(InternalAzureAuthorizationServer, AzureB2CAuthorizationServer)
+                //        .AddRequirements(new AllowedApplicationsRequirement(azureB2CValidationConfig.AllowedAppIds))
+                //.AddRequirements(new B2CAppScopeRequirement(new List<string> { ApiConstants.UsersReadScope, ApiConstants.UsersManageScope})).Build());
 
 
                 // Uncomment the code below for Azure AD and Azure AD B2C Token Validation
                 //Internal AD And B2C User Read Policy Name
-                //// Azure AD B2C and Azure AD Token validation
-                options.AddPolicy(ApiConstants.InternalAndB2CUserReadPolicyName, policyBuilder =>
-                    policyBuilder
-                        .AddAuthenticationSchemes(InternalAzureAuthorizationServer, AzureB2CAuthorizationServer)
-                        .AddRequirements(new AllowedApplicationsRequirement(azureADAndB2CValidationConfig.AllowedAppIds))
-                .AddRequirements(new B2CAndAzureADInternalScopeRequirement(new List<string> { ApiConstants.UsersReadScope, ApiConstants.UsersManageScope, ApiConstants.InternalUserReadScope, "CIAM.Users.Manage.Swg", "CIAM.Users.Manage" })).Build());
+                // Azure AD B2C and Azure AD Token validation
+                // Don't forget to change required scopes for your own scopes
+                //options.AddPolicy(ApiConstants.InternalAndB2CUserReadPolicyName, policyBuilder =>
+                //    policyBuilder
+                //        .AddAuthenticationSchemes(InternalAzureAuthorizationServer, AzureB2CAuthorizationServer)
+                //        .AddRequirements(new AllowedApplicationsRequirement(azureADAndB2CValidationConfig.AllowedAppIds))
+                //.AddRequirements(new B2CAndAzureADInternalScopeRequirement(new List<string> { ApiConstants.UsersReadScope, ApiConstants.UsersManageScope, ApiConstants.InternalUserReadScope })).Build());
 
 
-                  // Uncomment the code below for Multiple Token Validation including Okta token
+                // Uncomment the code below for Multiple Token Validation including Okta token
                 //Azure AD B2C, Azure AD and OKTA Token validation
-                options.AddPolicy(ApiConstants.MultipleValidationUserReadPolicyName, policyBuilder =>
-                    policyBuilder
-                        .AddAuthenticationSchemes(InternalAzureAuthorizationServer, AzureB2CAuthorizationServer, OktaAuthorizationServer)
-                        .AddRequirements(new AllowedApplicationsRequirement(multipleValidationConfig.AllowedAppIds))
-                .AddRequirements(new MultipleIdentityProviderScopeRequirement(new List<string> { ApiConstants.UsersReadScope, ApiConstants.UsersManageScope, ApiConstants.InternalUserReadScope, "CIAM.Users.Manage.Swg", "Customer-IAM.Users.Manage", "CIAM.Users.Manage" })).Build());
+                // Don't forget to change required scopes for your own scopes
+                //options.AddPolicy(ApiConstants.MultipleValidationUserReadPolicyName, policyBuilder =>
+                //    policyBuilder
+                //        .AddAuthenticationSchemes(InternalAzureAuthorizationServer, AzureB2CAuthorizationServer, OktaAuthorizationServer)
+                //        .AddRequirements(new AllowedApplicationsRequirement(multipleValidationConfig.AllowedAppIds))
+                //.AddRequirements(new MultipleIdentityProviderScopeRequirement(new List<string> { ApiConstants.UsersReadScope, ApiConstants.UsersManageScope, ApiConstants.InternalUserReadScope,  })).Build());
 
 
             });

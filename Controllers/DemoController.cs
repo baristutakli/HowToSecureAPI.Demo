@@ -53,8 +53,8 @@ namespace HowToSecureAPI.Demo.Controllers
         }
 
         /// <summary>
-        /// Only Azure AD INTERNAL And B2C apps allowed
-        /// This is created to show you azure ad internal authorization flow, only internal ad and Azure AD B2C token will be validated and internal apps and Azure AD B2C apps will be able to make request
+        /// Azure AD INTERNAL And Azure AD B2C apps allowed
+        /// This is created to show you Azure AD INTERNAL And Azure AD B2C authorization flow, only internal ad and Azure AD B2C token will be validated and internal apps and Azure AD B2C apps will be able to make request
         /// </summary>
         /// <returns></returns>
         [HttpGet("/acceptInternalADTokenAndB2CToken")]
@@ -65,10 +65,9 @@ namespace HowToSecureAPI.Demo.Controllers
         }
 
         /// <summary>
-        /// B2c apps and Azure Ad Internal
-        /// B2c apps and Azure Ad Internal apps are allowed to make request to this endpoint
-        /// This is created to show you B2c apps and Azure Ad Internal authorization flow, only internal ad token will be validated and internal apps will be able to make request
-        /// </summary>
+        /// B2c apps and Azure Ad Internal and Okta
+        /// B2c apps and Azure Ad Internal and Okta apps are allowed to make request to this endpoint
+        /// This is created to show you B2c apps, Azure Ad Internal and Okta authorization flow, B2c apps and Azure Ad Internal and Okta tokens will be validated.
         /// <returns></returns>
         [HttpGet("/acceptmultipletoken")]
         [Authorize(ApiConstants.MultipleValidationUserReadPolicyName)]

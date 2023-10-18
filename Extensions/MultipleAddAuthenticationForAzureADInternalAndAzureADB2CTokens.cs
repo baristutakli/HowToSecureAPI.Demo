@@ -13,7 +13,7 @@ namespace HowToSecureAPI.Demo.Extensions
 {
     /// <summary>
     /// Azure Ad and Azure AD B2C
-    /// Multiple Add Authentication For Token Validation
+    /// Add Authentication For Azure AD Internal And Azure AD B2C Tokens
     /// </summary>
     public static class MultipleAddAuthenticationForAzureADInternalAndAzureADB2CTokens
     {

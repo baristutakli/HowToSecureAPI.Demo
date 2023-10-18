@@ -12,7 +12,7 @@ using HowToSecureAPI.Demo.Configs.MultipleValidationIncludingOkta.OnlyAzureADAnd
 namespace HowToSecureAPI.Demo.Extensions
 {
     /// <summary>
-    /// Multiple Add Authentication For Token Validation Including Okta
+    /// Add Authentication For Azure AD Token Validation
     /// </summary>
     public static class AddAuthenticationForForAzureADInternalOnly
     {

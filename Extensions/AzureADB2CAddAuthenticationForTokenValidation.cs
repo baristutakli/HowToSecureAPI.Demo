@@ -12,18 +12,18 @@ using HowToSecureAPI.Demo.Configs.MultipleValidationIncludingOkta.OnlyAzureADAnd
 namespace HowToSecureAPI.Demo.Extensions
 {
     /// <summary>
-    /// Azure Ad and Azure AD B2C
-    /// Multiple Add Authentication For Token Validation
+    ///  Azure AD B2C
+    ///  Add Authentication For Token Validation
     /// </summary>
     public static class AzureADB2CAddAuthenticationForTokenValidation
     {
         private const string AzureB2CAuthorizationServer = "AzureB2CAuthorizationServer";
 
         /// <summary>
-        /// This extension class is created for validate Azure AD and Azure AD B2C tokens
+        ///  This extension class is created for validate Azure AD B2C token
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="multipleValidationConfig"></param>
+        /// <param name="azureB2CValidationConfig"></param>
         /// <returns></returns>
         public static IServiceCollection AddAuthenticationForAzureADB2C(this IServiceCollection services, AzureB2CValidationConfig azureB2CValidationConfig)
         {

@@ -35,7 +35,7 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
                 //... and tell Swagger to use those XML comments.
                 options.IncludeXmlComments(xmlPath);
 
-
+                // set scopes in a well format that swagger expect.
                 var scope = new Dictionary<string, string>();
 
                 foreach (var rightName in swaggerConfig.OAuthScopesAndDescriptions)
@@ -80,21 +80,17 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
 
             });
 
-            // Register the Swagger generator, defining 1 or more Swagger documents
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
-            //});
 
             return services;
         }
+
         /// <summary>
         /// Add use of swagger to IApplicationBuilder
         /// </summary>
-        /// <param name="app">IApplicationBuilder</param>
-        /// <param name="provider">IApiVersionDescriptionProvider</param>
-        /// <param name="swaggerConfig">SwaggerConfig</param>
-        /// <returns>IApplicationBuilder</returns>
+        /// <param name="app"></param>
+        /// <param name="provider"></param>
+        /// <param name="graphSwaggerConfig"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseSwaggerDocumentation(this IApplicationBuilder app,
             IApiVersionDescriptionProvider provider, AzureADB2CSwaggerConfig graphSwaggerConfig)
         {
@@ -121,15 +117,10 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
 
                 options.OAuthUsePkce();
 
-                // look at it later ToDo
                 options.OAuth2RedirectUrl(graphSwaggerConfig.RedirectUri);
 
             });
 
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            //});
             return app;
         }
 
