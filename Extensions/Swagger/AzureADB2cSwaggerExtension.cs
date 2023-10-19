@@ -16,6 +16,13 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
     /// </summary>
     public static class AzureADB2cSwaggerExtension
     {
+        private static string SecurityDefinitionName = "oauth2";
+        /// <summary>
+        ///  Add swagger gen configurations
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="swaggerConfig"></param>
+        /// <returns></returns>
         public static IServiceCollection SetupSwaggerDocumentation(this IServiceCollection services,
           AzureADB2CSwaggerConfig swaggerConfig)
         {
@@ -32,6 +39,9 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 //... and tell Swagger to use those XML comments.
                 options.IncludeXmlComments(xmlPath);
+
+                // remove obsolete actions from swagger
+                options.IgnoreObsoleteActions();
 
                 // set scopes in a well format that swagger expect.
                 var scope = new Dictionary<string, string>();
@@ -51,25 +61,24 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
                     }
                 };
 
-
                 //First we define the security scheme
-                var securityDefinitionName = "oauth2";
-                options.AddSecurityDefinition(securityDefinitionName, new OpenApiSecurityScheme
+                options.AddSecurityDefinition(SecurityDefinitionName, new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
                     Flows = flows,
                     In = ParameterLocation.Header,
                     Name = "Authorization",
                     BearerFormat = "JWT",
-                    Scheme = "bearer"
+                    Scheme = "bearer",
+                    Description = "JWT Authorization header using the Bearer scheme."
                 });
 
-                // to make sure that the bearer token is send in authorization
+                // To make sure that the bearer token is send in authorization
                 options.AddSecurityRequirement(new OpenApiSecurityRequirement{
                     {
                         new OpenApiSecurityScheme{
                             Reference = new OpenApiReference{
-                                Id = securityDefinitionName, //The name of the previously defined security scheme.
+                                Id = SecurityDefinitionName, //The name of the previously defined security scheme.
                                 Type = ReferenceType.SecurityScheme
                             }
                         },new List<string>()
@@ -77,7 +86,6 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
                 });
 
             });
-
 
             return services;
         }
@@ -109,6 +117,7 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
                     options.SwaggerEndpoint($"{description.GroupName}/swagger.json",
                         description.GroupName.ToUpperInvariant());
                 }
+
                 options.OAuthClientId(graphSwaggerConfig.OAuthClientId); // swagger application client id
 
                 options.OAuthAppName(graphSwaggerConfig.OAuthClientName); // swagger application name
@@ -122,6 +131,11 @@ namespace HowToSecureAPI.Demo.Extensions.Swagger
             return app;
         }
 
+        /// <summary>
+        /// This section is used to give you general information about this Demo API.
+        /// </summary>
+        /// <param name="description"></param>
+        /// <returns></returns>
         static OpenApiInfo CreateInfoForApiVersion(ApiVersionDescription description)
         {
             var info = new OpenApiInfo

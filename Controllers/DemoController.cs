@@ -9,10 +9,7 @@ namespace HowToSecureAPI.Demo.Controllers
     /// Demo controller
     /// </summary>
     [ApiController]
-    //[ApiVersion("1.0")]
     [Route("api/v{version:apiVersion}/users/")]
-    //[Route("api/[controller]/")]
-    //[Route("[controller]")]
     public class DemoController : ControllerBase
     {
         private static readonly string[] Users = new[]
