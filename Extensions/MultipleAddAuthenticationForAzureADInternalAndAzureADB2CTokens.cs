@@ -67,7 +67,6 @@ namespace HowToSecureAPI.Demo.Extensions
                 .AddJwtBearer(AzureB2CAuthorizationServer, options =>
                 {
                     options.Authority = azureADAndB2CValidationConfig.AzureADB2C.Authority;
-                    //options.Audience = "13cfb580-5366-4b81-b90b-92a1dca8879b";
                     options.MetadataAddress = azureADAndB2CValidationConfig.AzureADB2C.MetadataAddress;
 
                     options.RequireHttpsMetadata = false;

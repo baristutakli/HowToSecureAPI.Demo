@@ -22,8 +22,7 @@
 
         // Internal AD Policy
         public const string InternalUserReadPolicyName = "InternalUserReadPolicy";
-        public const string InternalUserReadScope = "onboardcustomers.salesquoteportal.access";
-
+        public const string InternalUserReadScope = "InternalUserReadScope";
         // B2C and Azure AD INTERNAL
         public const string InternalAndB2CUserReadPolicyName = "InternalAndB2CUserReadPolicy";
 
