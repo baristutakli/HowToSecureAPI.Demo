@@ -132,7 +132,7 @@ namespace HowToSecureAPI.Demo
                 // Don't forget to change required scopes for your own scopes
                 //options.AddPolicy(ApiConstants.UserReadPolicyName, policyBuilder =>
                 //    policyBuilder
-                //        .AddAuthenticationSchemes(InternalAzureAuthorizationServer, AzureB2CAuthorizationServer)
+                //        .AddAuthenticationSchemes(AzureB2CAuthorizationServer)
                 //        .AddRequirements(new AllowedApplicationsRequirement(azureB2CValidationConfig.AllowedAppIds))
                 //.AddRequirements(new B2CAppScopeRequirement(new List<string> { ApiConstants.UsersReadScope, ApiConstants.UsersManageScope})).Build());
 
