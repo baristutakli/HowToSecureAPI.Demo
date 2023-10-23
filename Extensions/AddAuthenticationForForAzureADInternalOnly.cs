@@ -1,13 +1,10 @@
-﻿using HowToSecureAPI.Demo.Configs.MultipleValidation.AzureADAndB2CWithOkta;
-using HowToSecureAPI.Demo.Configs.OnlyAzureADB2CValidation;
-using HowToSecureAPI.Demo.Configs.OnlyAzureADInternalValidation;
+﻿using HowToSecureAPI.Demo.Configs.OnlyAzureADInternalValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Generic;
-using HowToSecureAPI.Demo.Configs.MultipleValidationIncludingOkta.OnlyAzureADAndB2C;
 
 namespace HowToSecureAPI.Demo.Extensions
 {
