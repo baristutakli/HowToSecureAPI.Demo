@@ -1,6 +1,4 @@
-﻿using HowToSecureAPI.Demo.Configs.MultipleValidation.AzureADAndB2CWithOkta;
-using HowToSecureAPI.Demo.Configs.OnlyAzureADB2CValidation;
-using HowToSecureAPI.Demo.Configs.OnlyAzureADInternalValidation;
+﻿using HowToSecureAPI.Demo.Configs.OnlyAzureADB2CValidation;
 using HowToSecureAPI.Demo.Constants;
 using HowToSecureAPI.Demo.Requirements;
 using Microsoft.AspNetCore.Authorization;
